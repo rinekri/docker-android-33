@@ -18,16 +18,16 @@ ENV PATH "${PATH}:${ANDROID_HOME}/emulator"
 ENV PATH "${PATH}:${ANDROID_HOME}/bin"
 ENV PATH "${PATH}:$GRADLE_HOME/gradle-$GRADLE_VERSION/bin/"
 
+RUN dpkg --add-architecture i386 && \
+    apt-get update -yqq && \
+    apt-get install -y curl expect git libc6:i386 libgcc1:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-11-jdk wget unzip vim && \
+    apt-get clean
+
 RUN wget https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -P /tmp \
     && unzip -d /opt/gradle /tmp/gradle-*.zip \
     && chmod +775 /opt/gradle \
     && gradle --version \
     && rm -rf /tmp/gradle*
-
-RUN dpkg --add-architecture i386 && \
-    apt-get update -yqq && \
-    apt-get install -y curl expect git libc6:i386 libgcc1:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-11-jdk wget unzip vim && \
-    apt-get clean
 
 RUN groupadd android && useradd -d /opt/android-sdk-linux -g android android
 
