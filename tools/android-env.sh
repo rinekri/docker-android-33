@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 export ANDROID_HOME=/opt/android-sdk-linux
-export GRADLE_HOME=/opt/gradle/
 export ANDROID_SDK_ROOT=${ANDROID_HOME}
 export ANDROID_SDK_HOME=${ANDROID_HOME}
 export ANDROID_SDK=${ANDROID_HOME}
@@ -13,7 +12,6 @@ export PATH=${PATH}:${ANDROID_HOME}/build-tools/33.0.3
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 export PATH=${PATH}:${ANDROID_HOME}/emulator
 export PATH=${PATH}:${ANDROID_HOME}/bin
-export PATH=${PATH}:${GRADLE_HOME}/bin
 
 function print_header() {
     figlet SBB CFF FFS
