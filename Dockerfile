@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV GRADLE_VERSION=7.6
 
 ENV ANDROID_HOME      /opt/android-sdk-linux
-ENV GRADLE_HOME       /opt/gradle/
+ENV GRADLE_HOME       /opt/gradle
 ENV ANDROID_SDK_HOME  ${ANDROID_HOME}
 ENV ANDROID_SDK_ROOT  ${ANDROID_HOME}
 ENV ANDROID_SDK       ${ANDROID_HOME}
@@ -17,7 +17,7 @@ ENV PATH "${PATH}:${ANDROID_HOME}/build-tools/33.0.3"
 ENV PATH "${PATH}:${ANDROID_HOME}/platform-tools"
 ENV PATH "${PATH}:${ANDROID_HOME}/emulator"
 ENV PATH "${PATH}:${ANDROID_HOME}/bin"
-ENV PATH "${PATH}:$GRADLE_HOME/bin"
+ENV PATH "${PATH}:${GRADLE_HOME}/bin"
 
 RUN dpkg --add-architecture i386 && \
     apt-get update -yqq && \
