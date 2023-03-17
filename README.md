@@ -9,11 +9,11 @@ Docker for Android SDK 31 with preinstalled build tools and emulator image
 # sdkmanager --list
   Path                                        | Version | Description                                | Location                                   
   -------                                     | ------- | -------                                    | -------                                    
-  build-tools;33.0.3                          | 33.0.3  | Android SDK Build-Tools 33                 | build-tools/33.0.3                         
+  build-tools;30.0.3                          | 30.0.3  | Android SDK Build-Tools 33                 | build-tools/30.0.3                         
   cmdline-tools;latest                        | 6.0     | Android SDK Command-line Tools (latest)    | cmdline-tools/latest                       
   emulator                                    | 31.2.8  | Android Emulator                           | emulator                                   
   patcher;v4                                  | 1       | SDK Patch Applier v4                       | patcher/v4                                 
-  platform-tools                              | 33.0.3  | Android SDK Platform-Tools                 | platform-tools                             
+  platform-tools                              | latest  | Android SDK Platform-Tools                 | platform-tools                             
   platforms;android-31                        | 1       | Android SDK Platform 33                    | platforms/android-33                       
   system-images;android-31;google_apis;x86_64 | 8       | Google APIs Intel x86 Atom_64 System Image | system-images/android-33/google_apis/x86_64
 ```
