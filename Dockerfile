@@ -6,6 +6,9 @@ ENV ANDROID_HOME      /opt/android-sdk-linux
 ENV ANDROID_SDK_HOME  ${ANDROID_HOME}
 ENV ANDROID_SDK_ROOT  ${ANDROID_HOME}
 ENV ANDROID_SDK       ${ANDROID_HOME}
+ENV ANDROID_NDK       /opt/android-ndk-linux
+ENV ANDROID_NDK_ROOT  ${ANDROID_NDK}
+
 
 ENV PATH "${PATH}:${ANDROID_HOME}/cmdline-tools/latest/bin"
 ENV PATH "${PATH}:${ANDROID_HOME}/cmdline-tools/tools/bin"
@@ -17,8 +20,10 @@ ENV PATH "${PATH}:${ANDROID_HOME}/bin"
 
 RUN dpkg --add-architecture i386 && \
     apt-get update -yqq && \
-    apt-get install -y sudo openjdk-17-jdk curl expect git git-lfs libc6:i386 libgcc1:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-11-jdk wget unzip vim && \
+    apt-get install -y sudo openjdk-17-jdk curl expect git git-lfs libc6:i386 libgcc1:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 libz1:i386 openjdk-11-jdk wget unzip vim net-tools ccache && \
     apt-get clean
+
+ENV CCACHE_ROOT $(which ccache)
 
 RUN sudo update-java-alternatives --set java-1.17.0-openjdk-amd64
 
@@ -31,11 +36,15 @@ WORKDIR /opt/android-sdk-linux
 
 RUN /opt/tools/entrypoint.sh built-in
 
+
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "tools"
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "cmdline-tools;latest"
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "build-tools;30.0.3"
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "platform-tools"
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "platforms;android-33"
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "system-images;android-33;google_apis;x86_64"
+RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "cmake;3.22.1"
+RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "cmake;3.18.1"
+RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "ndk;25.2.9519653"
 
 CMD /opt/tools/entrypoint.sh built-in
