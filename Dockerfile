@@ -21,7 +21,7 @@ ENV PATH "${PATH}:${ANDROID_HOME}/bin"
 
 RUN dpkg --add-architecture i386 && \
     apt-get update -yqq && \
-    apt-get install -y sudo openjdk-17-jdk curl expect git git-lfs libc6:i386 libgcc1:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 libz1:i386 openjdk-11-jdk wget unzip vim net-tools ccache && \
+    apt-get install -y sudo openjdk-17-jdk curl expect git git-lfs libc6:i386 libgcc1:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 libz1:i386 openjdk-11-jdk wget unzip vim net-tools ccache g++ && \
     apt-get install -y wget gcc make openssl && \
     apt-get clean
 
