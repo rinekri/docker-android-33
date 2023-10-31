@@ -17,10 +17,14 @@ ENV PATH "${PATH}:${ANDROID_HOME}/bin"
 
 RUN dpkg --add-architecture i386 && \
     apt-get update -yqq && \
-    apt-get install -y sudo openjdk-17-jdk curl expect git git-lfs libc6:i386 libgcc1:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-11-jdk wget unzip vim && \
+    apt-get install -y sudo openjdk-17-jdk curl expect git git-lfs libc6:i386 libgcc1:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-11-jdk wget unzip vim npm yarn make ca-certificates zip nodejs && \
     apt-get clean
 
 RUN sudo update-java-alternatives --set java-1.17.0-openjdk-amd64
+
+RUN npm install -g danger
+
+RUN curl -s https://raw.githubusercontent.com/danger/kotlin/master/scripts/install.sh
 
 RUN groupadd android && useradd -d /opt/android-sdk-linux -g android android
 
