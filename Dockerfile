@@ -2,6 +2,7 @@ FROM ubuntu:23.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
+ENV DANGER_HOME       /opt/danger
 ENV ANDROID_HOME      /opt/android-sdk-linux
 ENV ANDROID_SDK_HOME  ${ANDROID_HOME}
 ENV ANDROID_SDK_ROOT  ${ANDROID_HOME}
@@ -24,7 +25,13 @@ RUN sudo update-java-alternatives --set java-1.17.0-openjdk-amd64
 
 RUN npm install -g danger
 
-RUN curl -s https://raw.githubusercontent.com/danger/kotlin/master/scripts/install.sh
+RUN curl -o kotlin-compiler.zip -L https://github.com/JetBrains/kotlin/releases/download/v1.7.0/kotlin-compiler-1.7.0.zip && \
+    unzip -d ${DANGER_HOME} kotlin-compiler.zip && \
+    rm -rf kotlin-compiler.zip
+ENV PATH "$PATH:${DANGER_HOME}/kotlinc/bin"
+
+RUN curl -s https://raw.githubusercontent.com/danger/kotlin/master/scripts/install.sh | bash
+RUN danger-kotlin
 
 RUN groupadd android && useradd -d /opt/android-sdk-linux -g android android
 
