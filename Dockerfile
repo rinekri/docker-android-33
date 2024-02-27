@@ -59,6 +59,6 @@ RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "platforms;android
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "system-images;android-33;google_apis;x86_64"
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "cmake;3.22.1"
 RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "cmake;3.18.1"
-RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "ndk;25.2.9519653"
+RUN /opt/android-sdk-linux/cmdline-tools/tools/bin/sdkmanager "ndk;26.2.11394342"
 
 CMD /opt/tools/entrypoint.sh built-in
