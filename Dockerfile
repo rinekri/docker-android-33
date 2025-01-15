@@ -17,12 +17,19 @@ ENV PATH "${PATH}:${ANDROID_HOME}/platform-tools"
 ENV PATH "${PATH}:${ANDROID_HOME}/emulator"
 ENV PATH "${PATH}:${ANDROID_HOME}/bin"
 
-RUN dpkg --add-architecture i386 && \
+RUN dpkg --add-architecture i386
+RUN sed -i -re 's/([a-z]{2}\.)?archive.ubuntu.com|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list && \
+    echo "deb http://security.ubuntu.com/ubuntu focal-security main universe" | tee -a /etc/apt/sources.list
+RUN apt-get update -yqq && \
+    apt-get install -y sudo wget gpg && \
+    wget -O - https://apt.corretto.aws/corretto.key | gpg --dearmor -o /usr/share/keyrings/corretto-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | tee /etc/apt/sources.list.d/corretto.list && \
     apt-get update -yqq && \
-    apt-get install -y sudo openjdk-17-jdk curl expect git git-lfs libc6:i386 libgcc1:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 openjdk-11-jdk wget unzip vim jq && \
+    apt-get install -y openjdk-21-jdk openjdk-17-jdk curl expect git git-lfs libc6:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 wget unzip vim jq && \
+    # apt-get install -y java-17-amazon-corretto-jdk curl expect git git-lfs libc6:i386 libncurses5:i386 libstdc++6:i386 zlib1g:i386 wget unzip vim jq && \
     apt-get clean
 
-RUN sudo update-java-alternatives --set java-1.17.0-openjdk-amd64
+RUN sudo update-java-alternatives --set java-1.21.0-openjdk-amd64
 
 RUN groupadd android && useradd -d /opt/android-sdk-linux -g android android
 
